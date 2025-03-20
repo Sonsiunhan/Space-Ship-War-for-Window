@@ -42,7 +42,6 @@ sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
 - Đồ họa 2D đơn giản nhưng hấp dẫn
 - Âm thanh chân thực
 - Điều khiển mượt mà
-- Nhiều loại kẻ địch khác nhau
 - Hiệu ứng đặc sắc
 
 ## 📂 Cấu trúc thư mục

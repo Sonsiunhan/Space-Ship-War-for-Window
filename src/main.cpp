@@ -111,7 +111,7 @@ int main(int argc, char* argv[]) {
         Item item(renderer, assets.itemTexture);
         bool alive = true;                  
         int cnt = 0;
-        while (state.isRunning) {
+        while (state.isRunning && alive) {
             frameStart = SDL_GetTicks(); // Lấy thời gian bắt đầu frame
             handleEvents(state, event);
 
@@ -149,7 +149,6 @@ int main(int argc, char* argv[]) {
             if(enemy_manager.checkCollisions(son.pos) || enemy_manager.checkPlayerEnemyCollision(son) ||
                enemy_manager_2.checkCollisions(son.pos) || enemy_manager_2.checkPlayerEnemyCollision(son)){
                 alive = 0;
-                return 1;
             }
 
             cnt = 1;

@@ -30,7 +30,7 @@ void HighScore::CreateTex(int& highScore){
 
     // Tạo texture từ surface
     tex = SDL_CreateTextureFromSurface(renderer, textSurface);
-    pos = {0, 30, textSurface->w, textSurface->h}; // Đặt vị trí ở góc trên bên trái
+    pos = {0, 0, textSurface->w, textSurface->h}; // Đặt vị trí ở góc trên bên trái
 
     SDL_FreeSurface(textSurface);
 

@@ -12,7 +12,7 @@
 const int SCREEN_HEIGHT = 560;
 const int SCREEN_WIDTH = 800;
 const SDL_Color white = {255, 255, 255, 255};
-const Uint32 speedIncreaseInterval = 5000; // Mỗi 5 giây tăng tốc một lần
+const Uint32 speedIncreaseInterval = 1000; // Mỗi 5 giây tăng tốc một lần
 
 
 using namespace std;
@@ -21,8 +21,11 @@ struct GameAssets {
     SDL_Texture* playerTexture = nullptr;
     SDL_Texture* turboTexture = nullptr;
     SDL_Texture* enemyTexture = nullptr;
+    SDL_Texture* enemyTexture_2 = nullptr;
     SDL_Texture* bulletTexture = nullptr;
     SDL_Texture* enemyBulletTexture = nullptr;
+    SDL_Texture* itemTexture = nullptr;
+
     vector<SDL_Texture*> explosions;
     vector<SDL_Texture*> backgroundTexture;
 

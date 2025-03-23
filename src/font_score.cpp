@@ -31,7 +31,7 @@ void FontScore::setScore(int newScore) {
 
     // Tạo texture từ surface
     textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
-    textRect = {0, 0, textSurface->w, textSurface->h}; // Đặt vị trí ở góc trên bên trái
+    textRect = {0, 30, textSurface->w, textSurface->h}; // Đặt vị trí ở góc trên bên trái
 
     SDL_FreeSurface(textSurface);
 }

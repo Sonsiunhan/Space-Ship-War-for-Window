@@ -1,6 +1,6 @@
 #include "../headers/enemy_manager.h"
 
-float gameSpeed = 1.0f;
+
 Uint32 lastSpeedIncreaseTime = 0;
 
 EnemyManager::EnemyManager(SDL_Renderer* renderer) : renderer(renderer) {}
@@ -11,9 +11,9 @@ void EnemyManager::update() {
     // Kiểm tra nếu đã đến thời điểm tăng tốc
     if (currentTime - lastSpeedIncreaseTime >= speedIncreaseInterval) {
         lastSpeedIncreaseTime = currentTime;
-        gameSpeed += 0.1f;  
+        gameSpeed += 0.05f;  
         for(auto& enemy : enemies){
-            enemy.speed += 0.02f;
+            enemy.speed += 0.05f;
         }
     }
 
@@ -50,7 +50,7 @@ void EnemyManager::render() {
 }
 
 void EnemyManager::spawnEnemy(SDL_Texture* enemyTexture) {
-    enemies.emplace_back(enemyTexture, 0.02f); // Thêm enemy mới vào danh sách
+    enemies.emplace_back(enemyTexture, 1.0f); // Thêm enemy mới vào danh sách
 }
 
 bool EnemyManager::checkCollisions(SDL_Rect& target) {

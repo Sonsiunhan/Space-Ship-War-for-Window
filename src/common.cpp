@@ -24,11 +24,13 @@ bool init(SDL_Window*& window, SDL_Renderer*& renderer, GameAssets& assets) {
 
 bool loadGameAssets(SDL_Renderer* renderer, GameAssets& assets) {
     assets.playerTexture = IMG_LoadTexture(renderer, "../assets/player/ship_4.png");
+    assets.enemyTexture_2 = IMG_LoadTexture(renderer, "../assets/enemies/ship_3.png");
     assets.enemyTexture = IMG_LoadTexture(renderer, "../assets/enemies/ship_1.png");
     assets.bulletTexture = IMG_LoadTexture(renderer, "../assets/bullet/shoot.png");
     assets.turboTexture = IMG_LoadTexture(renderer, "../assets/player/turbo_blue.png");
     assets.enemyBulletTexture = IMG_LoadTexture(renderer, "../assets/bullet/laser-bolts.png");
     assets.high_score_path = "../assets/high_score.txt";
+    assets.itemTexture = IMG_LoadTexture(renderer, "../assets/Item_1.png");
 
     vector<string> backgroundPaths = {
         "../assets/background/Starry background  - Layer 01 - Solid colour.png",
@@ -61,13 +63,13 @@ bool loadGameAssets(SDL_Renderer* renderer, GameAssets& assets) {
         assets.explosions.push_back(texture);
     }
 
-    assets.font = TTF_OpenFont("../assets/font/VTIMESN.TTF", 24);
+    assets.font = TTF_OpenFont("../assets/ProtestGuerrilla-Regular.ttf", 20);
     if (!assets.font) {
         SDL_Log("Failed to load font: %s", TTF_GetError());
         return false;
     }
     
-    assets.font_high = TTF_OpenFont("../assets/font/VTIMESN.TTF", 24);
+    assets.font_high = TTF_OpenFont("../assets/ProtestGuerrilla-Regular.ttf", 20);
     if (!assets.font_high){
         SDL_Log("Failed to load font: %s", TTF_GetError());
         return false;
@@ -93,11 +95,40 @@ bool checkCollision(const SDL_Rect& a, const SDL_Rect& b) {
 
 
 void cleanUp(SDL_Window* window, SDL_Renderer* renderer, GameAssets& assets) {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    // Hủy kết cấu hình ảnh
+    for(auto tex : assets.backgroundTexture){
+        SDL_DestroyTexture(tex);
+    }
+    SDL_DestroyTexture(assets.playerTexture);
+    SDL_DestroyTexture(assets.bulletTexture);
+    SDL_DestroyTexture(assets.turboTexture);
+    SDL_DestroyTexture(assets.enemyTexture);
+    SDL_DestroyTexture(assets.enemyTexture_2);
+    SDL_DestroyTexture(assets.enemyBulletTexture);
+    
+
+    // Hủy phông chữ
+    TTF_CloseFont(assets.font);
+    TTF_CloseFont(assets.font_high);
+    assets.font = nullptr;
+    assets.font_high = nullptr;
+
+
+    // Hủy renderer và window
+    if (renderer) {
+        SDL_DestroyRenderer(renderer);
+        renderer = nullptr;
+    }
+    if (window) {
+        SDL_DestroyWindow(window);
+        window = nullptr;
+    }
+
+    // Dừng SDL Mixer, TTF và SDL
     Mix_CloseAudio();
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 }
+
 

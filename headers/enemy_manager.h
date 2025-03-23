@@ -13,7 +13,8 @@ struct EnemyManager {
     vector<Bullet> enemyBullets;            // Lưu tất cả đạn của enemy
 
     Uint32 spawnInterval = 1500;            // Thời gian tạo ra enemy 
-    Uint32 lastSpawnTime = 0;               // Thời gian cũ đã tạo ra 
+    Uint32 lastSpawnTime = 0; 
+    float gameSpeed = 1.0f;             
     SDL_Texture* enemyTexture = nullptr;            // Ảnh của enemy
     SDL_Texture* bulletTex = nullptr;               // Ảnh của đạn
     SDL_Renderer* renderer = nullptr;

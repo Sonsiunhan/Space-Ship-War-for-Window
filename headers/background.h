@@ -9,7 +9,7 @@ struct Background {
     vector<SDL_Texture*> textures; // Danh sách texture của background
     vector<float> pos = {0, 0, 0}; // Vị trí của từng layer
     int h = 0, w = 0;
-    vector<float> scrollSpeed = {0.02f, 0.02f, 0.06f}; // Tốc độ cuộn nền
+    vector<float> scrollSpeed = {1.0f, 1.0f, 2.0f}; // Tốc độ cuộn nền
 
 
     Background() {}

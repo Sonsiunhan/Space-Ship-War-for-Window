@@ -42,7 +42,7 @@ void Player::update() {
     static Uint32 lastShootTime = 0;
     Uint32 currentTime = SDL_GetTicks(); // Lấy thời gian hiện tại
 
-    if (currentTime - lastShootTime >= 300) { // Bắn
+    if (currentTime - lastShootTime >= shootTime) { // Bắn
         shoot(bulletTexture);
         lastShootTime = currentTime; // Cập nhật thời điểm bắn gần nhất
     }
@@ -65,8 +65,35 @@ void Player::render(SDL_Renderer* renderer) {
 }
 
 void Player::shoot(SDL_Texture* bulletTexture) {
-	if (bulletTexture) {
-	    bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 10, 20, 0.4f, true);
-	}
+    if(level == 1)
+	   bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 0, 10, 20, - bulletSpeed, true);
+    else if(level == 2){
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2, pos.y, 0, 10, 20, - bulletSpeed, true);
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 10, pos.y, 0, 10, 20, - bulletSpeed, true);
+    }
+     else if (level == 3) {
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 0, 10, 20, - bulletSpeed, true); // Thẳng
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 15, pos.y, -  M_PI / 6, 10, 20, - bulletSpeed, true); // Chéo trái
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 + 5, pos.y, M_PI / 6, 10, 20, - bulletSpeed, true); // Chéo phải
+    }
+}
 
+void Player::checkCollisionWithItem(Item& item) {
+    if (!item.active) 
+        return;  // Nếu item không hoạt động, bỏ qua
+
+    SDL_Rect itemRect = item.destRect;  // Lấy hitbox của item
+
+    if (SDL_HasIntersection(&pos, &itemRect)) {  
+        bulletSpeed *= 1.5f;  // Tăng tốc độ đạn lên 1.5 lần
+        item.active = false;  // Ẩn item đi sau khi va chạm
+        shootTime *= 0.9f;
+
+        if(level != 3 && bulletSpeed > 30.0f){
+            bulletSpeed = 5.0f;
+            level++;
+        }
+        if(level >= 3)
+            level = 3;
+    }
 }

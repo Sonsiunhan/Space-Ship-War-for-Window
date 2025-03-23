@@ -2,7 +2,7 @@
 
 Menu::Menu(SDL_Renderer* renderer) : renderer(renderer), selectedOption(0) {
     TTF_Init();
-    font = TTF_OpenFont("../assets/font/ProtestGuerrilla-Regular.ttf", 20); // Thay bằng font của bạn
+    font = TTF_OpenFont("../assets/ProtestGuerrilla-Regular.ttf", 20); // Thay bằng font của bạn
     intro = IMG_LoadTexture(renderer, "../assets/background/intro.png");
 }
 

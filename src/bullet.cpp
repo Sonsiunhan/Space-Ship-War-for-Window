@@ -2,14 +2,14 @@
 
 Mix_Chunk* Bullet::fireSound = nullptr;
 
-Bullet::Bullet(SDL_Texture* tex, int x, int y, float angle, int w, int h, float spd, bool isPlayer)
+Bullet::Bullet(SDL_Texture* tex, int x, int y, float angle, int w, int h, float spd, bool isPlayer, int bulletCount)
     : bulletTexture(tex), speed(spd), realX(x) ,realY(y), isPlayerBullet(isPlayer) {
     pos = {x, y, w, h};
 
     vx = sin(angle) * speed;  // Tính vận tốc theo trục x
     vy = cos(angle) * speed;  // Tính vận tốc theo trục y
 
-    if (fireSound && isPlayerBullet) {
+    if (fireSound && isPlayerBullet && bulletCount == 1) {
         Mix_PlayChannel(-1, fireSound, 0);
     }
 }

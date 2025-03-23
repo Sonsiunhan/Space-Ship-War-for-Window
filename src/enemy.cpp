@@ -31,6 +31,6 @@ void Enemy::shoot(vector<Bullet>& enemyBullets, SDL_Texture* bulletTex) {
     Uint32 currentTime = SDL_GetTicks();
     if (currentTime > lastShootTime + 5000) { // Chờ 1 giây giữa mỗi lần bắn
         lastShootTime = currentTime;
-        enemyBullets.emplace_back(bulletTex, pos.x + pos.w / 2 - 5, pos.y + pos.h, 0, 10, 20, 4.0f, false);
+        enemyBullets.emplace_back(bulletTex, pos.x + pos.w / 2 - 5, pos.y + pos.h, 0, 10, 20, 4.0f, false, 1);
     }
 }

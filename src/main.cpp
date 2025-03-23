@@ -149,7 +149,7 @@ int main(int argc, char* argv[]) {
             if(enemy_manager.checkCollisions(son.pos) || enemy_manager.checkPlayerEnemyCollision(son) ||
                enemy_manager_2.checkCollisions(son.pos) || enemy_manager_2.checkPlayerEnemyCollision(son)){
                 alive = 0;
-                // break;
+                return 1;
             }
 
             cnt = 1;

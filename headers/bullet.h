@@ -14,7 +14,7 @@ struct Bullet {
     static Mix_Chunk* fireSound;
     bool isPlayerBullet;
 
-    Bullet(SDL_Texture* tex, int x, int y, float angle, int w, int h, float spd, bool isPlayer);    // khởi tạo
+    Bullet(SDL_Texture* tex, int x, int y, float angle, int w, int h, float spd, bool isPlayer, int bulletCount);    // khởi tạo
     void update();                  // cập nhật
     static void setFireSound(Mix_Chunk* sound);
     void render(SDL_Renderer* renderer);            // vẽ

@@ -66,15 +66,15 @@ void Player::render(SDL_Renderer* renderer) {
 
 void Player::shoot(SDL_Texture* bulletTexture) {
     if(level == 1)
-	   bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 0, 10, 20, - bulletSpeed, true);
+	   bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 0, 10, 20, - bulletSpeed, true, 1);
     else if(level == 2){
-        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2, pos.y, 0, 10, 20, - bulletSpeed, true);
-        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 10, pos.y, 0, 10, 20, - bulletSpeed, true);
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2, pos.y, 0, 10, 20, - bulletSpeed, true, 1);
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 10, pos.y, 0, 10, 20, - bulletSpeed, true, 2);
     }
      else if (level == 3) {
-        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 0, 10, 20, - bulletSpeed, true); // Thẳng
-        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 15, pos.y, -  M_PI / 6, 10, 20, - bulletSpeed, true); // Chéo trái
-        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 + 5, pos.y, M_PI / 6, 10, 20, - bulletSpeed, true); // Chéo phải
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 0, 10, 20, - bulletSpeed, true, 1); // Thẳng
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 15, pos.y, -  M_PI / 6, 10, 20, - bulletSpeed, true, 2); // Chéo trái
+        bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 + 5, pos.y, M_PI / 6, 10, 20, - bulletSpeed, true, 3); // Chéo phải
     }
 }
 
@@ -89,11 +89,13 @@ void Player::checkCollisionWithItem(Item& item) {
         item.active = false;  // Ẩn item đi sau khi va chạm
         shootTime *= 0.9f;
 
-        if(level != 3 && bulletSpeed > 30.0f){
-            bulletSpeed = 5.0f;
-            level++;
+        if(level != 3){
+            if(bulletSpeed >= 30.0f){
+                level++;
+                bulletSpeed = 5.0f;
+            }
         }
-        if(level >= 3)
-            level = 3;
+
+        bulletSpeed = min(bulletSpeed, 30.0f);
     }
 }

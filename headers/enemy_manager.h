@@ -14,12 +14,14 @@ struct EnemyManager {
 
     Uint32 spawnInterval = 1500;            // Thời gian tạo ra enemy 
     Uint32 lastSpawnTime = 0; 
-    float gameSpeed = 1.0f;             
+    float gameSpeed = 1.0f;     
+    int hp = 100;    
+  
     SDL_Texture* enemyTexture = nullptr;            // Ảnh của enemy
     SDL_Texture* bulletTex = nullptr;               // Ảnh của đạn
     SDL_Renderer* renderer = nullptr;
 
-    EnemyManager(SDL_Renderer* renderer);
+    EnemyManager(SDL_Renderer* renderer, int hp);
     void update();                              // cập nhật
     void render();            // vẽ
     bool checkCollisions(SDL_Rect &target);         // Kiểm tra va chạm của đạn của địch và người chơi

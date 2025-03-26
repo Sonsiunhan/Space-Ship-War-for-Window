@@ -7,11 +7,11 @@ Item::Item(SDL_Renderer* renderer, SDL_Texture* texture)
 }
 
 void Item::resetPosition() {
-    destRect.x = rand() % (SCREEN_WIDTH - 60);
-    destRect.y = -60;
+    destRect.x = rand() % (SCREEN_WIDTH - 90);
+    destRect.y = -90;
 
-    destRect.w = 60;
-    destRect.h = 60;
+    destRect.w = 90;
+    destRect.h = 90;
 
     ySpeed = 2.0f + (rand() % 3);
     rotationAngle = 0.0f;
@@ -19,7 +19,7 @@ void Item::resetPosition() {
 
     active = true;
     lastSpawnTime = SDL_GetTicks();
-    spawnInterval = 5000 + (rand() % 5000);
+    spawnInterval = 10000 + (rand() % 5000);
 }
 
 void Item::update() {

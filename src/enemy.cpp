@@ -2,8 +2,8 @@
 #include <ctime>
 #include <windows.h>
 
-Enemy::Enemy(SDL_Texture* tex, float speed)
-    : texture(tex), speed(speed), lastShootTime(0) {
+Enemy::Enemy(SDL_Texture* tex, float speed, int hp)
+    : texture(tex), speed(speed), hp(hp), lastShootTime(0) {
 
     // random ngẫu nhiên
     LARGE_INTEGER li;
@@ -33,4 +33,8 @@ void Enemy::shoot(vector<Bullet>& enemyBullets, SDL_Texture* bulletTex) {
         lastShootTime = currentTime;
         enemyBullets.emplace_back(bulletTex, pos.x + pos.w / 2 - 5, pos.y + pos.h, 0, 10, 20, 4.0f, false, 1);
     }
+}
+
+void Enemy::getHit(){
+    getBullet++;
 }

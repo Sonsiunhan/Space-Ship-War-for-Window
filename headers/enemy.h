@@ -13,14 +13,15 @@ struct Enemy {
     float realY;                // Vị trí thật
     bool destroyed = false;         // Kiểm tra đã bị tiêu diệt chưa
     Uint32 lastShootTime;           // Thời gian cũ đã tạo ra 
+    int hp, getBullet = 0;
 
-    Enemy(SDL_Texture* tex, float speed);       // Khởi tạo
+    Enemy(SDL_Texture* tex, float speed, int hp);       // Khởi tạo
     void update();                              // Cập nhật 
     void render(SDL_Renderer* renderer);                // Vẽ
     void shoot(vector<Bullet>& enemyBullets, SDL_Texture* bulletTex);
     SDL_Rect getPos() const { return pos; }             // Trả về giá trị vị trí
-    void setDestroyed() { destroyed = true; } // Đánh dấu enemy bị tiêu diệt       
-    bool isDestroyed() const { return destroyed; }
+    bool isDestroyed() const { return getBullet >= hp; }
+    void getHit();
 };
 
 #endif

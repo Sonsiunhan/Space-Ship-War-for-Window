@@ -81,11 +81,11 @@ int main(int argc, char* argv[]) {
         Player son;             // Khởi tạo người chơi
         son.init(renderer, assets.playerTexture, assets.bulletTexture, assets.turboTexture);        // Nhập dữ liệu vào 
 
-        EnemyManager enemy_manager(renderer);             // Khởi tạo quản lí kẻ địch
+        EnemyManager enemy_manager(renderer, 1);             // Khởi tạo quản lí kẻ địch
         enemy_manager.enemyTexture = assets.enemyTexture;       // Nhập vào ảnh của kẻ địch
         enemy_manager.bulletTex = assets.enemyBulletTexture;         // Nhập vào ảnh của đạn kẻ địch
 
-        EnemyManager enemy_manager_2(renderer);
+        EnemyManager enemy_manager_2(renderer, 2);
         enemy_manager_2.enemyTexture = assets.enemyTexture_2;
         enemy_manager_2.bulletTex = assets.enemyBulletTexture;
 

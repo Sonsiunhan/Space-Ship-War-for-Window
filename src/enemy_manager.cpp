@@ -3,7 +3,7 @@
 
 Uint32 lastSpeedIncreaseTime = 0;
 
-EnemyManager::EnemyManager(SDL_Renderer* renderer) : renderer(renderer) {}
+EnemyManager::EnemyManager(SDL_Renderer* renderer, int hp) : renderer(renderer), hp(hp) {}
 
 void EnemyManager::update() {
     Uint32 currentTime = SDL_GetTicks();
@@ -11,7 +11,7 @@ void EnemyManager::update() {
     // Kiểm tra nếu đã đến thời điểm tăng tốc
     if (currentTime - lastSpeedIncreaseTime >= speedIncreaseInterval) {
         lastSpeedIncreaseTime = currentTime;
-        gameSpeed += 0.05f;  
+        gameSpeed += 0.02f;  
         for(auto& enemy : enemies){
             enemy.speed += 0.05f;
         }
@@ -31,7 +31,7 @@ void EnemyManager::update() {
         bullet.update();
     }
 
-    // Cập nhật và xóa đạn enemy nếu cần
+    // Cập nhật và xóa đạn enemy
     enemyBullets.erase(remove_if(enemyBullets.begin(), enemyBullets.end(),
         [](Bullet& b) { return b.isOffScreen(SCREEN_HEIGHT); }), enemyBullets.end());
 
@@ -50,7 +50,7 @@ void EnemyManager::render() {
 }
 
 void EnemyManager::spawnEnemy(SDL_Texture* enemyTexture) {
-    enemies.emplace_back(enemyTexture, 1.0f); // Thêm enemy mới vào danh sách
+    enemies.emplace_back(enemyTexture, 1.0f, hp); // Thêm enemy mới vào danh sách
 }
 
 bool EnemyManager::checkCollisions(SDL_Rect& target) {
@@ -78,17 +78,23 @@ vector<int> EnemyManager::checkEnemyHit(vector<Bullet>& playerBullets) {
         [&](Bullet& bullet) {
             for (auto it = enemies.begin(); it != enemies.end(); ++it) {
                 if (checkCollision(bullet.getPos(), it->getPos())) {
-                    enemyDestroyed = 1;
-                    _x = it->pos.x;
-                    _y = it->pos.y;
+                    it -> getHit();
 
-                    enemies.erase(it); // Xóa enemy ngay lập tức
+                    if(it -> isDestroyed()){
+                        enemyDestroyed = 1;
+                        _x = it->pos.x;
+                        _y = it->pos.y;
+                        // cout<< it -> getBullet << endl;
+                        enemies.erase(it); // Xóa enemy ngay lập tức
+                    }
+                    
                     return true; // Xóa đạn của player
                 }
             }
             return false;
         }), playerBullets.end());
-
+    // enemies.erase(remove_if(enemies.begin(), enemies.end(), 
+    //     [](const Enemy& e) { return e.isDestroyed(); }), enemies.end());
     return {enemyDestroyed, _x, _y};
 }
 

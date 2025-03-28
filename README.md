@@ -14,29 +14,27 @@ Space Ship War là trò chơi được lấy cảm hứng từ tựa game bắn 
 - Cách tổ chức và thực hiện của code cũng như logic game rõ ràng, dễ hiểu
 
 ### Yêu cầu hệ thống
-- Hệ điều hành: Windows / Linux / macOS
+- Hệ điều hành: Windows
 - Trình biên dịch: `g++` (GCC)
 - Thư viện: SDL2, SDL2_image, SDL2_mixer, SDL2_ttf
 
-### Cài đặt SDL2 trên Ubuntu
-```sh
-sudo apt update
-sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
-```
-
-## 🎮 Cách chơi
+## Cách chơi
 1. Biên dịch game bằng:
     build system trên sublime text:
     {
-        "shell_cmd": "gnome-terminal -- bash -c 'g++ *.cpp -o game `sdl2-config --cflags --libs` -lSDL2_image -lSDL2_mixer -lSDL2_ttf && ./game; read -p \"Press enter to exit...\"'",
-        "working_dir": "$file_path",
-        "selector": "source.c, source.cpp",
-        "file_regex": "^(.*?):([0-9]*):?([0-9]*)?"
+        "shell_cmd": "g++ -I\"F:/SDL2/SDL2-devel-2.30.9-mingw/SDL2-2.30.9/x86_64-w64-mingw32/include/SDL2\" -L\"F:/SDL2/SDL2-devel-2.30.9-mingw/SDL2-2.30.9/x86_64-w64-mingw32/lib\" -o \"${file_path}/game.exe\" \"${file_path}/*.cpp\" -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -mconsole && start cmd /k \"${file_path}/game.exe\"",
+        "file_regex": "^(...*?):([0-9]*):?([0-9]*)",
+        "working_dir": "${file_path}",
+        "selector": "source.cpp"
     }
     
 2. Chạy game:
    game.exe
+
 3. Dùng chuột để di chuyển nhân vật
+
+## Video demo game
+    - https://drive.google.com/file/d/14Kz7yzsqPEflsaTHNVtlSV6Z-TgL13Ei/view?usp=sharing
 
 ## ✨ Tính năng nổi bật
 - Đồ họa 2D đơn giản nhưng hấp dẫn
@@ -58,15 +56,18 @@ Space-Ship-War/
     - https://ansimuz.itch.io/spaceship-shooter-environment
     - https://foozlecc.itch.io/void-environment-pack
     - https://pixel-by-pixel.itch.io/alcwilliam-space-ship-pack
+    - https://fonttiengviet.com/?s=Protest
+    - https://tiengdong.com/tieng-sung-laser-ban-trong-phim-khoa-hoc-vien-tuong
 
 ## Hỗ trợ từ AI
 - Hỗ trợ debug
-- Hỗ trợ giải thích công dụngAI, cách sử dụng của hàm, câu lệnh
+- Hỗ trợ giải thích công dụng, cách sử dụng của hàm, câu lệnh
 - Hỗ trợ hướng dẫn cách sử dụng github, SDL2
 - Hỗ trợ cung cấp build system chạy SDL2 trên sublime text
 - Hỗ trợ giới thiệu cách tổ chức file
-- Hỗ trợ xây dựng khung sườn chương trình và readme
+- Hỗ trợ xây dựng khung sườn chương trình
 - Hỗ trợ tăng tốc game
+
 ## Phần mềm sử dụng
 - Sublime text 3
 - Gimp

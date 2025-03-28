@@ -11,7 +11,7 @@ void EnemyManager::update() {
     // Kiểm tra nếu đã đến thời điểm tăng tốc
     if (currentTime - lastSpeedIncreaseTime >= speedIncreaseInterval) {
         lastSpeedIncreaseTime = currentTime;
-        gameSpeed += 0.02f;  
+        gameSpeed += 0.04f;  
         for(auto& enemy : enemies){
             enemy.speed += 0.05f;
         }
@@ -84,7 +84,6 @@ vector<int> EnemyManager::checkEnemyHit(vector<Bullet>& playerBullets) {
                         enemyDestroyed = 1;
                         _x = it->pos.x;
                         _y = it->pos.y;
-                        // cout<< it -> getBullet << endl;
                         enemies.erase(it); // Xóa enemy ngay lập tức
                     }
                     
@@ -93,8 +92,6 @@ vector<int> EnemyManager::checkEnemyHit(vector<Bullet>& playerBullets) {
             }
             return false;
         }), playerBullets.end());
-    // enemies.erase(remove_if(enemies.begin(), enemies.end(), 
-    //     [](const Enemy& e) { return e.isDestroyed(); }), enemies.end());
     return {enemyDestroyed, _x, _y};
 }
 
@@ -115,4 +112,11 @@ bool EnemyManager::checkPlayerEnemyCollision(Player& player) {
     return collisionHappened;
 }
 
+void EnemyManager::reset(){
+    enemies.clear();
+    enemyBullets.clear();
+    gameSpeed = 1.0f;
+    spawnInterval = 1500;
+    lastSpawnTime = 0;
+}
 

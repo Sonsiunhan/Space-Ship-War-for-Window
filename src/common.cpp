@@ -24,13 +24,13 @@ bool init(SDL_Window*& window, SDL_Renderer*& renderer, GameAssets& assets) {
 
 bool loadGameAssets(SDL_Renderer* renderer, GameAssets& assets) {
     assets.playerTexture = IMG_LoadTexture(renderer, "../assets/player/ship_4.png");
-    assets.enemyTexture_2 = IMG_LoadTexture(renderer, "../assets/enemies/ship_3.png");
     assets.enemyTexture = IMG_LoadTexture(renderer, "../assets/enemies/ship_1.png");
+    assets.enemyTexture_2 = IMG_LoadTexture(renderer, "../assets/enemies/ship_3.png");
     assets.bulletTexture = IMG_LoadTexture(renderer, "../assets/bullet/shoot.png");
     assets.turboTexture = IMG_LoadTexture(renderer, "../assets/player/turbo_blue.png");
     assets.enemyBulletTexture = IMG_LoadTexture(renderer, "../assets/bullet/laser-bolts.png");
     assets.high_score_path = "../assets/high_score.txt";
-    assets.itemTexture = IMG_LoadTexture(renderer, "../assets/Item_1.png");
+    assets.itemTexture = IMG_LoadTexture(renderer, "../assets/item_1.png");
 
     vector<string> backgroundPaths = {
         "../assets/background/Starry background  - Layer 01 - Solid colour.png",
@@ -78,10 +78,18 @@ bool loadGameAssets(SDL_Renderer* renderer, GameAssets& assets) {
     return true;
 }
 
-void handleEvents(GameState& state, SDL_Event &event) {
+void handleEvents(bool& isRunning, SDL_Event &event,GameState& gameState) {
     while (SDL_PollEvent(&event)) {
         if (event.type == SDL_QUIT) {
-            state.isRunning = false;
+            isRunning = false;
+        }
+
+        if(gameState == MENU && event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN){
+            gameState = PLAYING;
+        }
+
+        if(gameState == GAMEOVER && event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_r){
+            gameState = MENU;
         }
     }
 }

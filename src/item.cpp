@@ -3,15 +3,15 @@
 Item::Item(SDL_Renderer* renderer, SDL_Texture* texture)
     : texture(texture), active(false) {
     srand(time(0));
-    resetPosition();
+    resetPos();
 }
 
-void Item::resetPosition() {
+void Item::resetPos() {
     destRect.x = rand() % (SCREEN_WIDTH - 90);
-    destRect.y = -90;
+    destRect.y = -30;
 
-    destRect.w = 90;
-    destRect.h = 90;
+    destRect.w = 36;
+    destRect.h = 22;
 
     ySpeed = 2.0f + (rand() % 3);
     rotationAngle = 0.0f;
@@ -19,7 +19,7 @@ void Item::resetPosition() {
 
     active = true;
     lastSpawnTime = SDL_GetTicks();
-    spawnInterval = 10000 + (rand() % 5000);
+    spawnInterval = 20000 + (rand() % 5000);
 }
 
 void Item::update() {
@@ -33,7 +33,7 @@ void Item::update() {
         }
     } else {
         if (SDL_GetTicks() - lastSpawnTime > spawnInterval) {
-            resetPosition();
+            resetPos();
         }
     }
 }
@@ -46,4 +46,8 @@ void Item::render(SDL_Renderer* renderer) {
 
 bool Item::isOffScreen() const {
     return destRect.y > SCREEN_HEIGHT;
+}
+
+void Item::reset(){
+    active = false;
 }

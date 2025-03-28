@@ -29,6 +29,7 @@ struct Player {
 
     void setDestroyed() { destroyed = true; }       // Đánh dấu bị tiêu diệt
     bool isDestroyed() const { return destroyed; }
+    void reset();
 };
 
 #endif

@@ -9,8 +9,8 @@
 #include <vector>
 #include <algorithm>
 
-const int SCREEN_HEIGHT = 560;
-const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 675;
+const int SCREEN_WIDTH = 900;
 const SDL_Color white = {255, 255, 255, 255};
 const Uint32 speedIncreaseInterval = 1000; // Mỗi 5 giây tăng tốc một lần
 
@@ -26,6 +26,7 @@ struct GameAssets {
     SDL_Texture* enemyBulletTexture = nullptr;
     SDL_Texture* itemTexture = nullptr;
 
+
     vector<SDL_Texture*> explosions;
     vector<SDL_Texture*> backgroundTexture;
 
@@ -37,15 +38,15 @@ struct GameAssets {
     Mix_Chunk* shootSound = nullptr;
 };
 
-struct GameState {
-    bool isRunning = true;
-    int score = 0;
-    int playerHP = 4;
+enum GameState{
+    MENU,
+    PLAYING,
+    GAMEOVER
 };
 
 bool init(SDL_Window*& window, SDL_Renderer*& renderer, GameAssets& assets);
 bool loadGameAssets(SDL_Renderer* renderer, GameAssets& assets);
-void handleEvents(GameState& state, SDL_Event &event);
+void handleEvents(bool& isRunning, SDL_Event &event, GameState& gameState);
 bool checkCollision(const SDL_Rect& a, const SDL_Rect& b);
 void cleanUp(SDL_Window* window, SDL_Renderer* renderer, GameAssets& assets);
 

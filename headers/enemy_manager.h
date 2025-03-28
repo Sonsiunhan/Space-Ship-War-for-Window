@@ -15,7 +15,7 @@ struct EnemyManager {
     Uint32 spawnInterval = 1500;            // Thời gian tạo ra enemy 
     Uint32 lastSpawnTime = 0; 
     float gameSpeed = 1.0f;     
-    int hp = 100;    
+    int hp;    
   
     SDL_Texture* enemyTexture = nullptr;            // Ảnh của enemy
     SDL_Texture* bulletTex = nullptr;               // Ảnh của đạn
@@ -28,6 +28,7 @@ struct EnemyManager {
     void spawnEnemy(SDL_Texture* enemyTexture);             // Sinh ra kẻ địch
     vector<int> checkEnemyHit(vector<Bullet>& playerBullets);      // Kiểm tra va chạm của đạn người chơi và kẻ địch
     bool checkPlayerEnemyCollision(Player& player);         // Kiểm tra va chạm của người chơi và kẻ địch
+    void reset();
 };
 
 

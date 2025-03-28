@@ -14,8 +14,6 @@ void Player::init(SDL_Renderer* renderer, SDL_Texture* playerTexture, SDL_Textur
     pos = {(SCREEN_WIDTH - texW) / 2, SCREEN_HEIGHT - texH, texW, texH};
     turboPos = {(SCREEN_WIDTH - texW) / 2, SCREEN_HEIGHT - texH - 10, 10, 15};
     
-    // Ẩn con trỏ chuột
-    SDL_ShowCursor(SDL_DISABLE);
 }
 
 void Player::handleInput(SDL_Event& event) {
@@ -71,7 +69,7 @@ void Player::shoot(SDL_Texture* bulletTexture) {
         bullets.emplace_back(bulletTexture, pos.x + pos.w / 2, pos.y, 0, 10, 20, - bulletSpeed, true, 1);
         bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 10, pos.y, 0, 10, 20, - bulletSpeed, true, 2);
     }
-     else if (level == 3) {
+    else if (level == 3) {
         bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 5, pos.y, 0, 10, 20, - bulletSpeed, true, 1); // Thẳng
         bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 - 15, pos.y, -  M_PI / 6, 10, 20, - bulletSpeed, true, 2); // Chéo trái
         bullets.emplace_back(bulletTexture, pos.x + pos.w / 2 + 5, pos.y, M_PI / 6, 10, 20, - bulletSpeed, true, 3); // Chéo phải
@@ -90,12 +88,19 @@ void Player::checkCollisionWithItem(Item& item) {
         shootTime *= 0.9f;
 
         if(level != 3){
-            if(bulletSpeed >= 30.0f){
+            if(bulletSpeed >= 10.0f){
                 level++;
                 bulletSpeed = 5.0f;
             }
         }
-
-        bulletSpeed = min(bulletSpeed, 30.0f);
+        
+        bulletSpeed = min(bulletSpeed, 10.0f);
     }
+}
+
+void Player::reset(){
+    level = 1;
+    bulletSpeed = 5.0f;
+    shootTime = 300;
+    bullets.clear();
 }

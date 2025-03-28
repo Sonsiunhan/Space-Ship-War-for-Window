@@ -1,9 +1,9 @@
 #include "../headers/menu.h"
 
-Menu::Menu(SDL_Renderer* renderer) : renderer(renderer), selectedOption(0) {
+Menu::Menu(SDL_Renderer* renderer) : renderer(renderer){
     TTF_Init();
-    font = TTF_OpenFont("../assets/ProtestGuerrilla-Regular.ttf", 20); // Thay bằng font của bạn
-    intro = IMG_LoadTexture(renderer, "../assets/background/intro.png");
+    font = TTF_OpenFont("../assets/ProtestGuerrilla-Regular.ttf", 24); // Thay bằng font của bạn
+    intro = IMG_LoadTexture(renderer, "../assets/background/intro1.png");
 }
 
 Menu::~Menu() {
@@ -30,17 +30,6 @@ void Menu::render() {
     SDL_RenderPresent(renderer);
 }
 
-int Menu::check(SDL_Event& e) {
-    while (SDL_PollEvent(&e)) {
-        if (e.type == SDL_QUIT) {
-            return 0;
-        } 
-        else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN) {
-            return 2; // Thoát menu và vào game
-        }
-    }
-    return 1;
-}
 
 void Menu::alpha_mod(SDL_Renderer* renderer, SDL_Texture* texture){
     static int alpha = 0, deltaAlpha = 5;   // Độ đậm và giá trị thay đổi của độ đậm

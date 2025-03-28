@@ -19,7 +19,8 @@ struct Item {
     void update();
     void render(SDL_Renderer* renderer);
     bool isOffScreen() const;
-    void resetPosition();
+    void resetPos();
+    void reset();
 };
 
 #endif

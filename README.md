@@ -29,8 +29,7 @@ Space Ship War là trò chơi được lấy cảm hứng từ tựa game bắn 
     }
     
 2. Chạy game:
-   - Mở folder src
-   - Chạy file game.exe
+   - Mở file ssw.exe
 
 3. Dùng chuột để di chuyển nhân vật
 

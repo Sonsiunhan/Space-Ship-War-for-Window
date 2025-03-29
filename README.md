@@ -13,7 +13,7 @@ Space Ship War là trò chơi được lấy cảm hứng từ tựa game bắn 
 - Game của em có đồ họa, âm thanh, hiệu ứng khá mượn mà
 - Cách tổ chức và thực hiện của code cũng như logic game rõ ràng, dễ hiểu
 
-### Yêu cầu hệ thống
+## Yêu cầu hệ thống
 - Hệ điều hành: Windows
 - Trình biên dịch: `g++` (GCC)
 - Thư viện: SDL2, SDL2_image, SDL2_mixer, SDL2_ttf
@@ -29,12 +29,13 @@ Space Ship War là trò chơi được lấy cảm hứng từ tựa game bắn 
     }
     
 2. Chạy game:
-   game.exe
+   - Mở folder src
+   - Chạy file game.exe
 
 3. Dùng chuột để di chuyển nhân vật
 
 ## Video demo game
-    - https://drive.google.com/file/d/14Kz7yzsqPEflsaTHNVtlSV6Z-TgL13Ei/view?usp=sharing
+    - https://drive.google.com/file/d/1iUWZqRWv0uRgaaYOpWgUedF5HtsHJvsZ/view?usp=sharing
 
 ## ✨ Tính năng nổi bật
 - Đồ họa 2D đơn giản nhưng hấp dẫn
@@ -71,4 +72,3 @@ Space-Ship-War/
 ## Phần mềm sử dụng
 - Sublime text 3
 - Gimp
-
